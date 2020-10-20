@@ -3,7 +3,7 @@
     [list.default]
         proxy_list = ["127.0.0.1:6379"]
         conn_timeout = 500
-        password = ""
+        password = "123456"
         db = 0
         read_timeout = 1000
         write_timeout = 1000

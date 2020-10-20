@@ -22,19 +22,26 @@ var (
 )
 
 func main() {
+	// 解析参数
 	flag.Parse()
+
+	// 校验endpoint
 	if *endpoint == "" {
 		flag.Usage()
 		os.Exit(1)
 	}
+
+	// 校验config
 	if *config == "" {
 		flag.Usage()
 		os.Exit(1)
 	}
 
+	lib.InitModule(*config)
+	defer lib.Destroy()
+
 	if *endpoint == "dashboard" {
-		lib.InitModule(*config)
-		defer lib.Destroy()
+
 		router.HttpServerRun()
 
 		quit := make(chan os.Signal)
@@ -43,8 +50,7 @@ func main() {
 
 		router.HttpServerStop()
 	} else {
-		lib.InitModule(*config)
-		defer lib.Destroy()
+
 		dao.ServiceManagerHandler.LoadOnce()
 		dao.AppManagerHandler.LoadOnce()
 

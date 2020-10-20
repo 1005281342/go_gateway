@@ -2,8 +2,8 @@ package dao
 
 import (
 	"github.com/e421083458/go_gateway/dto"
-	"github.com/e421083458/go_gateway/public"
 	"github.com/e421083458/go_gateway/golang_common/lib"
+	"github.com/e421083458/go_gateway/public"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 	"net/http/httptest"
@@ -44,7 +44,7 @@ func NewServiceManager() *ServiceManager {
 }
 
 func (s *ServiceManager) GetTcpServiceList() []*ServiceDetail {
-	list := []*ServiceDetail{}
+	var list = make([]*ServiceDetail, 0)
 	for _, serverItem := range s.ServiceSlice {
 		tempItem := serverItem
 		if tempItem.Info.LoadType == public.LoadTypeTCP {
@@ -55,7 +55,7 @@ func (s *ServiceManager) GetTcpServiceList() []*ServiceDetail {
 }
 
 func (s *ServiceManager) GetGrpcServiceList() []*ServiceDetail {
-	list := []*ServiceDetail{}
+	var list = make([]*ServiceDetail, 0)
 	for _, serverItem := range s.ServiceSlice {
 		tempItem := serverItem
 		if tempItem.Info.LoadType == public.LoadTypeGRPC {
